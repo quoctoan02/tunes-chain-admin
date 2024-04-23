@@ -5,11 +5,7 @@ import { useCustom } from "@refinedev/core";
 import { Col, Row } from "antd";
 
 import {
-  CompaniesMap,
-  DashboardDealsChart,
-  DashboardTasksChart,
   DashboardTotalCountCard,
-  DashboardTotalRevenueChart,
 } from "./components";
 
 export const DashboardPage: React.FC = () => {
@@ -59,7 +55,7 @@ export const DashboardPage: React.FC = () => {
             height: "432px",
           }}
         >
-          <DashboardTotalRevenueChart />
+          {/*<DashboardTotalRevenueChart />*/}
         </Col>
         <Col
           xs={24}
@@ -69,7 +65,7 @@ export const DashboardPage: React.FC = () => {
             height: "432px",
           }}
         >
-          <DashboardDealsChart />
+          {/*<DashboardDealsChart />*/}
         </Col>
       </Row>
 
@@ -87,7 +83,7 @@ export const DashboardPage: React.FC = () => {
             height: "448px",
           }}
         >
-          <DashboardTasksChart />
+          {/*<DashboardTasksChart />*/}
         </Col>
         <Col
           xs={24}
@@ -97,7 +93,6 @@ export const DashboardPage: React.FC = () => {
             height: "448px",
           }}
         >
-          <CompaniesMap />
         </Col>
       </Row>
     </div>

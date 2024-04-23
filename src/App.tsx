@@ -17,7 +17,7 @@ import routerBindings, {
   UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
 import dataProvider from "@refinedev/simple-rest";
-import { App as AntdApp } from "antd";
+import {App as AntdApp, ConfigProvider} from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider } from "./authProvider";
 import { AppIcon } from "./components/app-icon";
@@ -38,12 +38,13 @@ import {
 import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
-import {DashboardOutlined} from "@ant-design/icons";
 import {DashboardPage} from "./pages/dashboard";
+import {resources, themeConfig} from "@/config";
 
 function App() {
   return (
     <BrowserRouter>
+      <ConfigProvider theme={themeConfig}>
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <AntdApp>
@@ -52,46 +53,7 @@ function App() {
                 notificationProvider={useNotificationProvider}
                 authProvider={authProvider}
                 routerProvider={routerBindings}
-                resources={[
-                  {
-                    name: "blog_posts",
-                    list: "/blog-posts",
-                    create: "/blog-posts/create",
-                    edit: "/blog-posts/edit/:id",
-                    show: "/blog-posts/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
-                  },
-                  {
-                    name: "categories",
-                    list: "/categories",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
-                  },
-                  {
-                    name: "dashboard",
-                    list: "/",
-                    meta: {
-                      label: "Dashboard",
-                      icon: <DashboardOutlined />,
-                    },
-                  },
-                  {
-                    name: "artists",
-                    list: "/artists",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
-                  },
-                ]}
+                resources={resources}
                 options={{
                   syncWithLocation: true,
                   warnWhenUnsavedChanges: true,
@@ -112,7 +74,7 @@ function App() {
                           Title={({ collapsed }) => (
                             <ThemedTitleV2
                               collapsed={collapsed}
-                              text="Refine Project"
+                              text="Tunes chain"
                               icon={<AppIcon />}
                             />
                           )}
@@ -121,11 +83,7 @@ function App() {
                         </ThemedLayoutV2>
                       </Authenticated>
                     }
-                  >
-                    <Route
-                      index
-                      element={<NavigateToResource resource="blog_posts" />}
-                    />
+                  >dash
                     <Route index element={<DashboardPage />} />
                     <Route path="/blog-posts">
                       <Route index element={<BlogPostList />} />
@@ -154,7 +112,7 @@ function App() {
                         key="authenticated-outer"
                         fallback={<Outlet />}
                       >
-                        <NavigateToResource />
+                        <NavigateToResource  resource="dashboard" />
                       </Authenticated>
                     }
                   >
@@ -174,6 +132,7 @@ function App() {
           </AntdApp>
         </ColorModeContextProvider>
       </RefineKbarProvider>
+      </ConfigProvider>
     </BrowserRouter>
   );
 }

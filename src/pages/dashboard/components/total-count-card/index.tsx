@@ -155,7 +155,7 @@ const variants: {
         />
       </IconWrapper>
     ),
-    title: "Number of companies",
+    title: "Total artists",
     data: [
       {
         index: "1",
