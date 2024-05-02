@@ -1,13 +1,14 @@
-
-import {Space, Table, TableColumnsType} from "antd";
+import { Space, Table, TableColumnsType } from "antd";
 import ImagePrimary from "@/libs/image";
 import moment from "moment";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { Service } from "@/services";
+import { onChange } from "react-toastify/dist/core/store";
 import { DeleteButton, EditButton, ShowButton } from "@refinedev/antd";
 import { BaseRecord } from "@refinedev/core";
+import { toFixedNumber, truncateAddress } from "@/utils";
 
-export const ArtistList = () => {
+export const UserList = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [total, setTotal] = useState(1);
@@ -17,9 +18,9 @@ export const ArtistList = () => {
   };
   const [data, setData] = useState();
   const buildData = async () => {
-    let { total, data } = await Service.listArtist({
+    let { total, data } = await Service.listUser({
       limit: pageSize,
-      offset: pageSize * (page - 1),
+      offset: page - 1,
     });
     setData(
       data.map((item: any) => {
@@ -39,19 +40,12 @@ export const ArtistList = () => {
     {
       title: "Avatar",
       dataIndex: "avatar",
-      render: (url: string) => (
-        <ImagePrimary
-          style={{ height: "40px", width: "40px", borderRadius: "100%" }}
-          src={url}
-        />
-      ),
     },
     {
       title: "Name",
       dataIndex: "name",
-      render: (text: string) => <a>{text}</a>,
+      // render: (text: string) => <a>{text}</a>,
     },
-
     {
       title: "Email",
       dataIndex: "email",
@@ -60,28 +54,13 @@ export const ArtistList = () => {
       title: "Address",
       dataIndex: "address",
     },
-    {
-      title: "Status",
-      dataIndex: "status",
-    },
-    {
-      title: "Actions",
-      dataIndex: "actions",
-      render: (_, record: BaseRecord) => (
-        <Space>
-          <DeleteButton hideText size="small" recordItemId={record.id} />
-        </Space>
-      ),
-    },
   ];
 
   return (
-    <div>
-      <Table
-        columns={columns}
-        dataSource={data}
-        pagination={{ onChange: handlePagination, total: total }}
-      />
-    </div>
+    <Table
+      columns={columns}
+      dataSource={data}
+      pagination={{ onChange: handlePagination, total: total }}
+    />
   );
 };

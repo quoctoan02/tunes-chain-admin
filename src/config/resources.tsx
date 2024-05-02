@@ -9,9 +9,15 @@ import {
   ShopOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
-import {MdLibraryMusic, MdOutlinePeopleAlt, MdOutlineQueueMusic} from "react-icons/md";
-import {FaHistory, FaUserCheck} from "react-icons/fa";
-
+import {
+  MdChecklistRtl,
+  MdLibraryMusic,
+  MdOutlinePeopleAlt,
+  MdOutlineQueueMusic,
+} from "react-icons/md";
+import { FaFlag, FaHistory, FaRegFlag, FaUserCheck } from "react-icons/fa";
+import { FiUserCheck } from "react-icons/fi";
+import { LuListMusic } from "react-icons/lu";
 export const resources: IResourceItem[] = [
   {
     name: "dashboard",
@@ -50,7 +56,18 @@ export const resources: IResourceItem[] = [
     show: "/categories/show/:id",
     meta: {
       canDelete: true,
-      icon: <MdOutlinePeopleAlt size={18}/>,
+      icon: <FiUserCheck size={18} />,
+    },
+  },
+  {
+    name: "unverified-artists",
+    list: "/unverified-artists",
+    create: "/categories/create",
+    edit: "/categories/edit/:id",
+    show: "/categories/show/:id",
+    meta: {
+      label: "Unverified artists",
+      icon: <MdChecklistRtl size={18} />,
     },
   },
 
@@ -59,7 +76,15 @@ export const resources: IResourceItem[] = [
     list: "/songs",
     meta: {
       label: "Songs",
-      icon: <MdOutlineQueueMusic size={20}/>,
+      icon: <LuListMusic size={18} />,
+    },
+  },
+  {
+    name: "report-songs",
+    list: "/report-songs",
+    meta: {
+      label: "Report songs",
+      icon: <FaRegFlag />,
     },
   },
   {
@@ -70,23 +95,14 @@ export const resources: IResourceItem[] = [
     show: "/categories/show/:id",
     meta: {
       canDelete: true,
-      icon: <FaUserCheck />,
+      icon: <MdOutlinePeopleAlt size={18} />,
     },
   },
   {
-    name: "histories",
-    list: "/histories",
+    name: "transactions",
+    list: "/transactions",
     meta: {
-      label: "Buy histories",
-      icon: <FaHistory size={14}/>,
-    },
-  },
-  {
-    name: "songs",
-    list: "/songs",
-    meta: {
-      label: "Songs",
-      icon: <FaHistory />,
+      icon: <FaHistory size={14} />,
     },
   },
 ];

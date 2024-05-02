@@ -1,13 +1,14 @@
-
-import {Space, Table, TableColumnsType} from "antd";
+import { Space, Table, TableColumnsType } from "antd";
 import ImagePrimary from "@/libs/image";
 import moment from "moment";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { Service } from "@/services";
-import { DeleteButton, EditButton, ShowButton } from "@refinedev/antd";
 import { BaseRecord } from "@refinedev/core";
+import VerifyButton from "@/libs/verify-button";
+import DeleteButton from "@/libs/delete-button";
+import { toast } from "react-toastify";
 
-export const ArtistList = () => {
+export const UnverifiedArtistList = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [total, setTotal] = useState(1);
@@ -17,7 +18,7 @@ export const ArtistList = () => {
   };
   const [data, setData] = useState();
   const buildData = async () => {
-    let { total, data } = await Service.listArtist({
+    let { total, data } = await Service.listUnverifiedArtist({
       limit: pageSize,
       offset: pageSize * (page - 1),
     });
@@ -31,10 +32,26 @@ export const ArtistList = () => {
     );
     setTotal(total);
   };
+  const handleVerify = async (data: any) => {
+    console.log(
+      "🚀 ~ handleVerify ~ await Service.verifyArtist({ artistId: data.id, verified: true }):",
+      await Service.verifyArtist({ artistId: data.id, verified: true })
+    );
+
+    if (await Service.verifyArtist({ artistId: data.id, verified: true }))
+      toast.success("Verify artist successfully");
+    setTotal(total - 1);
+  };
+  const handleReject = async (data: any) => {
+    if (await Service.verifyArtist({ artistId: data.id, verified: false }))
+      toast.success("Reject artist successfully");
+    setTotal(total - 1);
+  };
   useEffect(() => {
     buildData();
     return () => {};
-  }, [page, pageSize]);
+  }, [page, pageSize, total]);
+
   const columns: TableColumnsType = [
     {
       title: "Avatar",
@@ -69,7 +86,8 @@ export const ArtistList = () => {
       dataIndex: "actions",
       render: (_, record: BaseRecord) => (
         <Space>
-          <DeleteButton hideText size="small" recordItemId={record.id} />
+          <VerifyButton onConfirm={handleVerify} data={record} />
+          <DeleteButton onDelete={handleReject} data={record} />
         </Space>
       ),
     },

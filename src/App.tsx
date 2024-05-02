@@ -40,106 +40,136 @@ import {Login} from "./pages/login";
 import {Register} from "./pages/register";
 import {DashboardPage} from "./pages/dashboard";
 import {resources, themeConfig} from "@/config";
+import { ArtistList } from "./pages/artists/list";
+import { SongList } from "./pages/songs/list";
+import { UnverifiedArtistList } from "./pages/unverified-artists/list";
+import { ReportSongList } from "./pages/report-songs/list";
+import { TransactionList } from "./pages/transactions/list";
+import { UserList } from "./pages/users/list";
 
 function App() {
-    return (
-        <BrowserRouter>
-            <ConfigProvider theme={themeConfig}>
-                <RefineKbarProvider>
-                    <ColorModeContextProvider>
-                        <AntdApp>
-                            <Refine
-                                // dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
-                                notificationProvider={useNotificationProvider}
-                                authProvider={authProvider}
-                                routerProvider={routerBindings}
-                                resources={resources}
-                                options={{
-                                    syncWithLocation: true,
-                                    warnWhenUnsavedChanges: true,
-                                    useNewQueryKeys: true,
-                                    projectId: "RvOboI-01toLL-SsHJYI",
-                                }}
-                            >
-                                <Routes>
-                                    <Route
-                                        element={
-                                            <Authenticated
-                                                key="authenticated-inner"
-                                                fallback={<CatchAllNavigate to="/login"/>}
-                                            >
-                                                <ThemedLayoutV2
-                                                    Header={() => <Header sticky/>}
-                                                    Sider={(props) => <ThemedSiderV2 {...props} fixed/>}
-                                                    Title={({collapsed}) => (
-                                                        <ThemedTitleV2
-                                                            collapsed={collapsed}
-                                                            text="Tunes chain"
-                                                            icon={<AppIcon/>}
-                                                        />
-                                                    )}
-                                                >
-                                                    <Outlet/>
-                                                </ThemedLayoutV2>
-                                            </Authenticated>
-                                        }
-                                    >
-                                        <Route index element={<DashboardPage/>}/>
-                                        <Route path="/blog-posts">
-                                            <Route index element={<BlogPostList/>}/>
-                                            <Route path="create" element={<BlogPostCreate/>}/>
-                                            <Route path="edit/:id" element={<BlogPostEdit/>}/>
-                                            <Route path="show/:id" element={<BlogPostShow/>}/>
-                                        </Route>
-                                        <Route path="/categories">
-                                            <Route index element={<CategoryList/>}/>
-                                            <Route path="create" element={<CategoryCreate/>}/>
-                                            <Route path="edit/:id" element={<CategoryEdit/>}/>
-                                            <Route path="show/:id" element={<CategoryShow/>}/>
-                                        </Route>
-                                        <Route path="/artists">
-                                            <Route index element={<CategoryList/>}/>
-                                            <Route path="create" element={<CategoryCreate/>}/>
-                                            <Route path="edit/:id" element={<CategoryEdit/>}/>
-                                            <Route path="show/:id" element={<CategoryShow/>}/>
-                                        </Route>
-                                        <Route path="/songs">
-                                            <Route index element={<CategoryList/>}/>
-                                            <Route path="create" element={<CategoryCreate/>}/>
-                                            <Route path="edit/:id" element={<CategoryEdit/>}/>
-                                            <Route path="show/:id" element={<CategoryShow/>}/>
-                                        </Route>
-                                        <Route path="*" element={<ErrorComponent/>}/>
-                                    </Route>
-                                    <Route
-                                        element={
-                                            <Authenticated
-                                                key="authenticated-outer"
-                                                fallback={<Outlet/>}
-                                            >
-                                                <NavigateToResource resource="dashboard"/>
-                                            </Authenticated>
-                                        }
-                                    >
-                                        <Route path="/login" element={<Login/>}/>
-                                        <Route path="/register" element={<Register/>}/>
-                                        <Route
-                                            path="/forgot-password"
-                                            element={<ForgotPassword/>}
-                                        />
-                                    </Route>
-                                </Routes>
+  return (
+    <BrowserRouter>
+      <ConfigProvider theme={themeConfig}>
+        <RefineKbarProvider>
+          <ColorModeContextProvider>
+            <AntdApp>
+              <Refine
+                // dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+                notificationProvider={useNotificationProvider}
+                authProvider={authProvider}
+                routerProvider={routerBindings}
+                resources={resources}
+                options={{
+                  syncWithLocation: true,
+                  warnWhenUnsavedChanges: true,
+                  useNewQueryKeys: true,
+                  projectId: "RvOboI-01toLL-SsHJYI",
+                }}
+              >
+                <Routes>
+                  <Route
+                    element={
+                      <Authenticated
+                        key="authenticated-inner"
+                        fallback={<CatchAllNavigate to="/login" />}
+                      >
+                        <ThemedLayoutV2
+                          Header={() => <Header sticky />}
+                          Sider={(props) => <ThemedSiderV2 {...props} fixed />}
+                          Title={({ collapsed }) => (
+                            <ThemedTitleV2
+                              collapsed={collapsed}
+                              text="Tunes chain"
+                              icon={<AppIcon />}
+                            />
+                          )}
+                        >
+                          <Outlet />
+                        </ThemedLayoutV2>
+                      </Authenticated>
+                    }
+                  >
+                    <Route index element={<DashboardPage />} />
+                    <Route path="/blog-posts">
+                      <Route index element={<BlogPostList />} />
+                      <Route path="create" element={<BlogPostCreate />} />
+                      <Route path="edit/:id" element={<BlogPostEdit />} />
+                      <Route path="show/:id" element={<BlogPostShow />} />
+                    </Route>
+                    <Route path="/categories">
+                      <Route index element={<CategoryList />} />
+                      <Route path="create" element={<CategoryCreate />} />
+                      <Route path="edit/:id" element={<CategoryEdit />} />
+                      <Route path="show/:id" element={<CategoryShow />} />
+                    </Route>
+                    <Route path="/artists">
+                      <Route index element={<ArtistList />} />
+                      <Route path="create" element={<CategoryCreate />} />
+                      <Route path="edit/:id" element={<CategoryEdit />} />
+                      <Route path="show/:id" element={<CategoryShow />} />
+                    </Route>
+                    <Route path="/unverified-artists">
+                      <Route index element={<UnverifiedArtistList />} />
+                      <Route path="create" element={<CategoryCreate />} />
+                      <Route path="edit/:id" element={<CategoryEdit />} />
+                      <Route path="show/:id" element={<CategoryShow />} />
+                    </Route>
+                    <Route path="/songs">
+                      <Route index element={<SongList />} />
+                      <Route path="create" element={<CategoryCreate />} />
+                      <Route path="edit/:id" element={<CategoryEdit />} />
+                      <Route path="show/:id" element={<CategoryShow />} />
+                    </Route>
+                    <Route path="/report-songs">
+                      <Route index element={<ReportSongList />} />
+                      <Route path="create" element={<CategoryCreate />} />
+                      <Route path="edit/:id" element={<CategoryEdit />} />
+                      <Route path="show/:id" element={<CategoryShow />} />
+                    </Route>
+                    <Route path="/transactions">
+                      <Route index element={<TransactionList />} />
+                      <Route path="create" element={<CategoryCreate />} />
+                      <Route path="edit/:id" element={<CategoryEdit />} />
+                      <Route path="show/:id" element={<CategoryShow />} />
+                    </Route>
+                    <Route path="/users">
+                      <Route index element={<UserList />} />
+                      <Route path="create" element={<CategoryCreate />} />
+                      <Route path="edit/:id" element={<CategoryEdit />} />
+                      <Route path="show/:id" element={<CategoryShow />} />
+                    </Route>
+                    <Route path="*" element={<ErrorComponent />} />
+                  </Route>
+                  <Route
+                    element={
+                      <Authenticated
+                        key="authenticated-outer"
+                        fallback={<Outlet />}
+                      >
+                        <NavigateToResource resource="dashboard" />
+                      </Authenticated>
+                    }
+                  >
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route
+                      path="/forgot-password"
+                      element={<ForgotPassword />}
+                    />
+                  </Route>
+                </Routes>
 
-                                <RefineKbar/>
-                                <UnsavedChangesNotifier/>
-                                <DocumentTitleHandler/>
-                            </Refine>
-                        </AntdApp>
-                    </ColorModeContextProvider>
-                </RefineKbarProvider>
-            </ConfigProvider>
-        </BrowserRouter>
-    );
+                <RefineKbar />
+                <UnsavedChangesNotifier />
+                <DocumentTitleHandler />
+              </Refine>
+            </AntdApp>
+          </ColorModeContextProvider>
+        </RefineKbarProvider>
+      </ConfigProvider>
+    </BrowserRouter>
+  );
 }
 
 export default App;

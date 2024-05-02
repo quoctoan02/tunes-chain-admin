@@ -1,23 +1,26 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from "axios"
-import { camelizeKeys } from "humps"
+import { camelizeKeys, decamelizeKeys } from "humps";
 
-import { toast } from "react-toastify"
-import {API_URL} from "@/config/endpoint";
+import { toast } from "react-toastify";
+import { API_URL } from "@/config/endpoint";
 
 export const http: AxiosInstance = axios.create({
-    baseURL: API_URL,
-    timeout: 1000000,
-    headers: {},
-})
+  baseURL: API_URL,
+  timeout: 1000000,
+  headers: {},
+});
 
 function onRequestFulfilled(config: InternalAxiosRequestConfig) {
-    const token = localStorage.getItem("admin-token")
+  const token = localStorage.getItem("admin-token");
 
-    if (token) {
-        config.headers["Authorization"] = `Bearer ${token}`
-    }
-
-    return config
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
+  }
+  if (!config.headers["Content-Type"]?.toString().includes("form")) {
+    config.params = decamelizeKeys(config.params);
+    config.data = decamelizeKeys(config.data);
+  }
+  return config;
 }
 
 function onResponseFulfilled(response: AxiosResponse) {
