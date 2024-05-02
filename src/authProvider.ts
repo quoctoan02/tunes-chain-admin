@@ -1,11 +1,14 @@
 import { AuthBindings } from "@refinedev/core";
+import {Service} from "@/services";
 
-export const TOKEN_KEY = "refine-auth";
+export const TOKEN_KEY = "admin-token";
 
 export const authProvider: AuthBindings = {
   login: async ({ username, email, password }) => {
+    console.log("--> (authProvider.ts:60) ~ email:", email);
     if ((username || email) && password) {
-      localStorage.setItem(TOKEN_KEY, username);
+      const res = await Service.login({email, password})
+      localStorage.setItem(TOKEN_KEY, res?.data?.token);
       return {
         success: true,
         redirectTo: "/",

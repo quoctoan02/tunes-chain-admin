@@ -9,8 +9,8 @@ import {
   ShopOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
-import {MdOutlinePeopleAlt} from "react-icons/md";
-import {FaHistory} from "react-icons/fa";
+import {MdLibraryMusic, MdOutlinePeopleAlt, MdOutlineQueueMusic} from "react-icons/md";
+import {FaHistory, FaUserCheck} from "react-icons/fa";
 
 export const resources: IResourceItem[] = [
   {
@@ -50,7 +50,27 @@ export const resources: IResourceItem[] = [
     show: "/categories/show/:id",
     meta: {
       canDelete: true,
-      icon: <MdOutlinePeopleAlt />,
+      icon: <MdOutlinePeopleAlt size={18}/>,
+    },
+  },
+
+  {
+    name: "songs",
+    list: "/songs",
+    meta: {
+      label: "Songs",
+      icon: <MdOutlineQueueMusic size={20}/>,
+    },
+  },
+  {
+    name: "users",
+    list: "/users",
+    create: "/categories/create",
+    edit: "/categories/edit/:id",
+    show: "/categories/show/:id",
+    meta: {
+      canDelete: true,
+      icon: <FaUserCheck />,
     },
   },
   {
@@ -58,6 +78,14 @@ export const resources: IResourceItem[] = [
     list: "/histories",
     meta: {
       label: "Buy histories",
+      icon: <FaHistory size={14}/>,
+    },
+  },
+  {
+    name: "songs",
+    list: "/songs",
+    meta: {
+      label: "Songs",
       icon: <FaHistory />,
     },
   },

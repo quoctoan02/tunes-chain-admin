@@ -10,6 +10,7 @@ import {
 } from "antd";
 import React, { useContext } from "react";
 import { ColorModeContext } from "../../contexts/color-mode";
+import {UserInfo} from "@/components/user-info";
 
 const { Text } = Typography;
 const { useToken } = theme;
@@ -45,15 +46,14 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   return (
     <AntdLayout.Header style={headerStyles}>
       <Space>
-        <Switch
-          checkedChildren="🌛"
-          unCheckedChildren="🔆"
-          onChange={() => setMode(mode === "light" ? "dark" : "light")}
-          defaultChecked={mode === "dark"}
-        />
+        {/*<Switch*/}
+        {/*  checkedChildren="🌛"*/}
+        {/*  unCheckedChildren="🔆"*/}
+        {/*  onChange={() => setMode(mode === "light" ? "dark" : "light")}*/}
+        {/*  defaultChecked={mode === "dark"}*/}
+        {/*/>*/}
         <Space style={{ marginLeft: "8px" }} size="middle">
-          {user?.name && <Text strong>{user.name}</Text>}
-          {user?.avatar && <Avatar src={user?.avatar} alt={user?.name} />}
+          <UserInfo />
         </Space>
       </Space>
     </AntdLayout.Header>

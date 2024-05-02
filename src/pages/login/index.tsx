@@ -5,15 +5,11 @@ export const Login = () => {
   return (
     <AuthPage
       type="login"
-      title={
-        <ThemedTitleV2
-          collapsed={false}
-          text="Refine Project"
-          icon={<AppIcon />}
-        />
-      }
+      title={false}
+      registerLink={false}
+      forgotPasswordLink={false}
       formProps={{
-        initialValues: { email: "demo@refine.dev", password: "demodemo" },
+        initialValues: { email: "admin@tunes-chain.com", password: "admin" },
       }}
     />
   );
