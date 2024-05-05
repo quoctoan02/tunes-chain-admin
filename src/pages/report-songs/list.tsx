@@ -42,17 +42,12 @@ export const ReportSongList = () => {
   }, [page, pageSize, total]);
 
   const handleVerify = async (data: any) => {
-    console.log(
-      "🚀 ~ handleVerify ~ await Service.verifyArtist({ artistId: data.id, verified: true }):",
-      await Service.verifyArtist({ artistId: data.id, verified: true })
-    );
-
-    if (await Service.verifyArtist({ artistId: data.id, verified: true }))
+    if (await Service.verifyReport({ reportId: data.id, verified: true }))
       toast.success("Verify artist successfully");
     setTotal(total - 1);
   };
   const handleReject = async (data: any) => {
-    if (await Service.verifyArtist({ artistId: data.id, verified: false }))
+    if (await Service.verifyReport({ reportId: data.id, verified: false }))
       toast.success("Reject artist successfully");
     setTotal(total - 1);
   };

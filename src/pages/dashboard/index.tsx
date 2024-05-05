@@ -41,7 +41,7 @@ export const DashboardPage: React.FC = () => {
             totalCount={100}
           />
         </Col>
-          <Col xs={24} sm={24} xl={6}>
+        <Col xs={24} sm={24} xl={6}>
           <DashboardTotalCountCard
             resource="transactions"
             isLoading={false}
@@ -60,24 +60,28 @@ export const DashboardPage: React.FC = () => {
           xs={24}
           sm={24}
           xl={12}
-          style={{
-            // height: "432px",
-          }}
+          style={
+            {
+              // height: "432px",
+            }
+          }
         >
-          <LineChart label={"Artists"} icon={ <FaUserCheck />}/>
+          <LineChart label={"Artists"} icon={<FaUserCheck />} />
         </Col>
         <Col
           xs={24}
           sm={24}
           xl={12}
-          style={{
-            // height: "432px",
-          }}
+          style={
+            {
+              // height: "432px",
+            }
+          }
         >
-            <LineChart label={"Users"}  icon={ <MdOutlinePeopleAlt size={18}/>}/>
+          <LineChart label={"Users"} icon={<MdOutlinePeopleAlt size={18} />} />
         </Col>
       </Row>
-        <Row
+      <Row
         gutter={[32, 32]}
         style={{
           marginTop: "32px",
@@ -87,25 +91,27 @@ export const DashboardPage: React.FC = () => {
           xs={24}
           sm={24}
           xl={12}
-          style={{
-            // height: "432px",
-          }}
+          style={
+            {
+              // height: "432px",
+            }
+          }
         >
-          <LineChart label={"Songs"}/>
+          <LineChart label={"Songs"} />
         </Col>
         <Col
           xs={24}
           sm={24}
           xl={12}
-          style={{
-            // height: "432px",
-          }}
+          style={
+            {
+              // height: "432px",
+            }
+          }
         >
-            <LineChart label={"Transactions"}/>
+          <LineChart label={"Transactions"} />
         </Col>
       </Row>
-
-
     </div>
   );
 };

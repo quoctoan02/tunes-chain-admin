@@ -94,7 +94,6 @@ export const resources: IResourceItem[] = [
     edit: "/categories/edit/:id",
     show: "/categories/show/:id",
     meta: {
-      canDelete: true,
       icon: <MdOutlinePeopleAlt size={18} />,
     },
   },
